@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:islami/home/home_screen.dart';
+import 'package:islami/utils/app_assets.dart';
+import 'package:islami/utils/app_routs.dart';
 
 class IntroScreen extends StatelessWidget {
-  static const String routeName = 'Intro';
 
   @override
   Widget build(BuildContext context) {
@@ -10,12 +12,11 @@ class IntroScreen extends StatelessWidget {
       globalBackgroundColor: const Color(0xFF1E1E1E),
 
       pages: [
-        // الصفحة الأولى (الصورة كاملة)
         PageViewModel(
           title: '',
           body: '',
           image: Image.asset(
-            'assets/images/intro1.png',
+            AppAssets.intro1,
             fit: BoxFit.contain,
             width: double.infinity,
           ),
@@ -32,7 +33,7 @@ class IntroScreen extends StatelessWidget {
           title: '',
           body: '',
           image: Image.asset(
-            'assets/images/intro2.png',
+            AppAssets.intro2,
             fit: BoxFit.contain,
             width: double.infinity,
           ),
@@ -49,7 +50,7 @@ class IntroScreen extends StatelessWidget {
           title: '',
           body: '',
           image: Image.asset(
-            'assets/images/intro3.png',
+            AppAssets.intro3,
             fit: BoxFit.contain,
             width: double.infinity,
           ),
@@ -66,7 +67,7 @@ class IntroScreen extends StatelessWidget {
           title: '',
           body: '',
           image: Image.asset(
-            'assets/images/intro4.png',
+            AppAssets.intro4,
             fit: BoxFit.contain,
             width: double.infinity,
           ),
@@ -83,7 +84,7 @@ class IntroScreen extends StatelessWidget {
           title: '',
           body: '',
           image: Image.asset(
-            'assets/images/intro5.png',
+            AppAssets.intro5,
             fit: BoxFit.contain,
             width: double.infinity,
           ),
@@ -97,17 +98,26 @@ class IntroScreen extends StatelessWidget {
           ),
         ),
 
-        // الصفحات اللي بعدها (كمثال)
+
       ],
 
       showSkipButton: false,
-      showDoneButton: false,
+      showDoneButton: true,
       showNextButton: true,
       showBackButton: true,
 
       back: const Text('Back', style: TextStyle(color: Color(0xFFE2BE7F))),
-
       next: const Text('Next', style: TextStyle(color: Color(0xFFE2BE7F))),
+      done: const Text('Next', style: TextStyle(color: Color(0xFFE2BE7F))),
+      onDone: () {
+        Navigator.pushReplacementNamed(
+          context,
+          AppRouts.homeScreenRoute,
+        );
+      },
+
+
+
       dotsDecorator: const DotsDecorator(
         activeColor: Color(0xFFE2BE7F),
         color: Colors.grey,

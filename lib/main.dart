@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/intro_screen.dart';
+import 'package:islami/utils/app_routs.dart';
+import 'package:islami/utils/app_theme.dart';
 
 import 'home/home_screen.dart';
 
@@ -19,11 +21,13 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
     return MaterialApp(
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      initialRoute: IntroScreen.routeName,
+      initialRoute: AppRouts.introScreenRout,
       routes: {
-        IntroScreen.routeName: (context) => IntroScreen(),
-        HomeScreen.routeName: (context) => HomeScreen(),
+        AppRouts.introScreenRout: (context) => IntroScreen(),
+        AppRouts.homeScreenRoute: (context) => HomeScreen(),
       },
     );
   }
