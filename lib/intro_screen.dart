@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:islami/home/home_screen.dart';
 import 'package:islami/utils/app_assets.dart';
 import 'package:islami/utils/app_routs.dart';
 
@@ -10,7 +9,6 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntroductionScreen(
       globalBackgroundColor: const Color(0xFF1E1E1E),
-
       pages: [
         PageViewModel(
           title: '',

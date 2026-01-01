@@ -38,6 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery
+        .of(context)
+        .size
+        .height;
     return Stack(
       children: [
         Image.asset(
@@ -46,6 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
           height: double.infinity,
           fit: BoxFit.cover,
         ),
+
+        // Column(
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
+        //   children: [
+        //     Image.asset('assets/images/islamiLogo.png'),
+        //   ],
+        // ),
 
         Scaffold(
           backgroundColor: Colors.transparent,
@@ -76,7 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Image.asset('assets/images/islamiLogo.png'),
               Expanded(child: tabsList[selectedIndex]
 
               ),

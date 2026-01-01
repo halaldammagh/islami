@@ -14,4 +14,5 @@ class AppAssets {
   static const String radiopg = 'assets/images/background/radio_screen.png';
   static const String hadethpg = 'assets/images/background/hadeth_screen.png';
   static const String timepg = 'assets/images/background/time_screen.png';
+  static const String vector = 'assets/images/Vector.png';
 }
