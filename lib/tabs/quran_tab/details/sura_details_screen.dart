@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:islami/model/quran_resources.dart';
+import 'package:islami/providers/most_recent_provider.dart';
 import 'package:islami/tabs/quran_tab/details/sura_details1.dart';
 import 'package:islami/tabs/quran_tab/details/sura_details2.dart';
 import 'package:islami/utils/app_colors.dart';
 import 'package:islami/utils/app_styles.dart';
+import 'package:provider/provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   @override
@@ -11,10 +13,12 @@ class SuraDetailsScreen extends StatefulWidget {
 }
 
 class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
+  late MostRecentProvider mostRecentProvider;
   bool show = true;
 
   @override
   Widget build(BuildContext context) {
+    mostRecentProvider= Provider.of<MostRecentProvider>(context);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     int index = ModalRoute.of(context)?.settings.arguments as int;
@@ -73,5 +77,14 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
       ),
       body: show ? SuraDetails1(index: index) : SuraDetails2(index: index),
     );
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    //todo: read last sura index from shared prefs
+    mostRecentProvider.getLastSuraIndex();
+
+
   }
 }

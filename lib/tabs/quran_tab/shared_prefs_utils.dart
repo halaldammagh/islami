@@ -26,14 +26,3 @@ void saveLastSuraIndex(int newSuraIndex) async {
   await prefs.setStringList(SharedPrefsKey.mostRecently, mostRecentList);
 }
 
-//todo: get last sura index => read data
-Future<List<int>> getLastSuraIndex() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  List<String> mostRecentIndicesAsString =
-      prefs.getStringList(SharedPrefsKey.mostRecently) ?? [];
-  List<int> mostRecentIndicesAsInt = mostRecentIndicesAsString
-      .map((newSuraIndex) => int.parse(newSuraIndex))
-      .toList();
-  return mostRecentIndicesAsInt;
-  //return mostRecentIndicesAsInt.reversed.toList(); بدل ما نعمل هيك بنستخدم insert بدل ال add
-}
