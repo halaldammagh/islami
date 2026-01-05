@@ -20,28 +20,24 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
-  List<String>backgroundImages = [
+  List<String> backgroundImages = [
     AppAssets.quranBg,
     AppAssets.hadethpg,
     AppAssets.sebhapg,
     AppAssets.radiopg,
-    AppAssets.timepg
+    AppAssets.timepg,
   ];
-  List<Widget>tabsList = [
-    QuarnTab(),
+  List<Widget> tabsList = [
+    QuranTab(),
     HadethTab(),
     SebhaTab(),
     RadioTab(),
-    TimeTab()
-
+    TimeTab(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    var height = MediaQuery.of(context).size.height;
     return Stack(
       children: [
         Image.asset(
@@ -57,14 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
         //     Image.asset('assets/images/islamiLogo.png'),
         //   ],
         // ),
-
         Scaffold(
           backgroundColor: Colors.transparent,
 
           bottomNavigationBar: Theme(
-            data: Theme.of(context).copyWith(
-                canvasColor: AppColors.primaryColor
-            ),
+            data: Theme.of(
+              context,
+            ).copyWith(canvasColor: AppColors.primaryColor),
             child: BottomNavigationBar(
               currentIndex: selectedIndex,
               onTap: (index) {
@@ -73,16 +68,30 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               items: [
                 buildBottomNavBarItem(
-                    index: 0, image: AppAssets.quran, label: 'Quran'),
+                  index: 0,
+                  image: AppAssets.quran,
+                  label: 'Quran',
+                ),
                 buildBottomNavBarItem(
-                    index: 1, image: AppAssets.hadeth, label: 'Hadeth'),
+                  index: 1,
+                  image: AppAssets.hadeth,
+                  label: 'Hadeth',
+                ),
                 buildBottomNavBarItem(
-                    index: 2, image: AppAssets.sebha, label: 'Sebha'),
+                  index: 2,
+                  image: AppAssets.sebha,
+                  label: 'Sebha',
+                ),
                 buildBottomNavBarItem(
-                    index: 3, image: AppAssets.radio, label: 'Radio'),
+                  index: 3,
+                  image: AppAssets.radio,
+                  label: 'Radio',
+                ),
                 buildBottomNavBarItem(
-                    index: 4, image: AppAssets.time, label: 'Time')
-
+                  index: 4,
+                  image: AppAssets.time,
+                  label: 'Time',
+                ),
               ],
             ),
           ),
@@ -90,9 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image.asset('assets/images/islamiLogo.png'),
-              Expanded(child: tabsList[selectedIndex]
-
-              ),
+              Expanded(child: tabsList[selectedIndex]),
             ],
           ),
         ),
@@ -100,35 +107,35 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  BottomNavigationBarItem buildBottomNavBarItem(
-      {required int index, required String image, required String label}) {
+  BottomNavigationBarItem buildBottomNavBarItem({
+    required int index,
+    required String image,
+    required String label,
+  }) {
     return BottomNavigationBarItem(
-        icon:
-        selectedIndex == index ?
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          decoration: BoxDecoration(
-              color: AppColors.blackpg,
-              borderRadius: BorderRadius.circular(66)
-          ),
-          child: SvgPicture.asset(
+      icon: selectedIndex == index
+          ? Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              decoration: BoxDecoration(
+                color: AppColors.blackpg,
+                borderRadius: BorderRadius.circular(66),
+              ),
+              child: SvgPicture.asset(
+                image,
+                colorFilter: ColorFilter.mode(
+                  selectedIndex == index ? AppColors.white : AppColors.black,
+                  BlendMode.srcIn,
+                ),
+              ),
+            )
+          : SvgPicture.asset(
               image,
               colorFilter: ColorFilter.mode(
-                  selectedIndex == index
-                      ?
-                  AppColors.white
-                      :
-                  AppColors.black,
-                  BlendMode.srcIn)),
-        ) : SvgPicture.asset(
-            image,
-            colorFilter: ColorFilter.mode(
-                selectedIndex == index
-                    ?
-                AppColors.white
-                    :
-                AppColors.black,
-                BlendMode.srcIn)),
-        label: label);
+                selectedIndex == index ? AppColors.white : AppColors.black,
+                BlendMode.srcIn,
+              ),
+            ),
+      label: label,
+    );
   }
 }

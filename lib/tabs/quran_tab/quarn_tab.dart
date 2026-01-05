@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:islami/model/quran_resources.dart';
+import 'package:islami/tabs/quran_tab/widget/most_recently.dart';
 import 'package:islami/tabs/quran_tab/widget/sura_item_widget.dart';
 import 'package:islami/utils/app_assets.dart';
 import 'package:islami/utils/app_colors.dart';
@@ -8,7 +9,17 @@ import 'package:islami/utils/app_routs.dart';
 import 'package:islami/utils/app_styles.dart';
 
 ///width : 430  height : 932
-class QuarnTab extends StatelessWidget {
+class QuranTab extends StatefulWidget {
+
+  QuranTab({super.key});
+
+  @override
+  State<QuranTab> createState() => _QuranTabState();
+}
+
+class _QuranTabState extends State<QuranTab> {
+  List<int> filterList = List.generate(114, (index) => index);
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery
@@ -20,7 +31,8 @@ class QuarnTab extends StatelessWidget {
         .size
         .width;
 
-    return Scaffold(backgroundColor: Colors.transparent,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.04),
 
@@ -30,76 +42,54 @@ class QuarnTab extends StatelessWidget {
           spacing: height * 0.01,
           children: [
             TextField(
-              style: TextStyle(
-                  color: AppColors.white
-              ),
+              style: TextStyle(color: AppColors.white),
               cursorColor: AppColors.primaryColor,
+              onChanged: (newText) {
+                searchByNewsText(newText);
+                setState(() {
+
+                });
+              },
 
               /// لون الماوس
               decoration: InputDecoration(
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: SvgPicture.asset(AppAssets.quran,
-                      colorFilter: ColorFilter.mode(
-                          AppColors.primaryColor, BlendMode.srcIn),),
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: SvgPicture.asset(
+                    AppAssets.quran,
+                    colorFilter: ColorFilter.mode(
+                      AppColors.primaryColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
-                  enabledBorder: buildOutLineInputBorder(),
-                  focusedBorder: buildOutLineInputBorder(),
-                  hintText: 'Sura Name',
-                  hintStyle: AppStyles.bold16White
+                ),
+                enabledBorder: buildOutLineInputBorder(),
+                focusedBorder: buildOutLineInputBorder(),
+                hintText: 'Sura Name',
+                hintStyle: AppStyles.bold16White,
               ),
             ),
-            Text('Most Recently',
-                style: AppStyles.bold16White
-            ),
-            SizedBox(height: height * 0.18,
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppColors.primaryColor,
-                      ),
+            MostRecently(),
+            Text('Sura List', style: AppStyles.bold16White),
+            Expanded(
+              child: filterList.isEmpty ?
+              Center(child: Text(
+                'No Sura Item Found', style: AppStyles.bold20White,))
 
-                      child: Row(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(QuranResources.englishQuranSurahList[index],
-                                  style: AppStyles.bold24Black),
-                              Text(QuranResources.arabicQuranSuraList[index],
-                                style: AppStyles.bold24Black,),
-                              Text('${QuranResources
-                                  .versesNumberList[index]} Verses',
-                                style: AppStyles.bold14Black,),
-                            ],
-                          ),
-                          Image.asset('assets/images/minimage/reading.png',
-                            color: Colors.black,)
+                  : ListView.separated(
+                padding: EdgeInsets.zero,
 
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return SizedBox(width: width * 0.04,);
-                  },
-                  itemCount: QuranResources.versesNumberList.length),
-            ),
-            Text('Sura List', style: AppStyles.bold16White,),
-            Expanded(child: ListView.separated(
+                ///لازم تلغي الـ padding الافتراضي بتاع ListView.
                 itemBuilder: (context, index) {
                   return InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(
-                            AppRouts.suraDetailsScreen,
-                            arguments: index);
-                      },
-                      child: SuraItemWidget(index: index,));
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        AppRouts.suraDetailsScreen,
+                        arguments: filterList[index],
+                      );
+                    },
+                    child: SuraItemWidget(index: filterList[index]),
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return Divider(
@@ -107,29 +97,38 @@ class QuarnTab extends StatelessWidget {
                     thickness: 2,
                     indent: width * 0.06,
                     endIndent: width * 0.06,
-
                   );
                 },
-                itemCount: QuranResources.versesNumberList.length))
-
-
+                itemCount: filterList.length,
+              ),
+            ),
           ],
         ),
       ),
-
     );
   }
 
   OutlineInputBorder buildOutLineInputBorder() {
     return OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
-          color: AppColors.primaryColor,
-          width: 2,
-        )
-
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(color: AppColors.primaryColor, width: 2),
     );
   }
+
+  void searchByNewsText(String newText) {
+    List<int> filterSearchList = [];
+    for (int i = 0; i < QuranResources.englishQuranSurahList.length; i++) {
+      if (QuranResources.englishQuranSurahList[i].toLowerCase().contains(
+          newText.toLowerCase())) {
+        filterSearchList.add(i);
+      }
+    }
+    for (int i = 0; i < QuranResources.arabicQuranSuraList.length; i++) {
+      if (QuranResources.arabicQuranSuraList[i].toLowerCase().contains(
+          newText.toLowerCase())) {
+        filterSearchList.add(i);
+      }
+    }
+    filterList = filterSearchList;
+  }
 }
-
-
