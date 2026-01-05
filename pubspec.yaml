@@ -40,6 +40,10 @@ dependencies:
     #صورة مرسومة بمعادلات ما بتتكسر لو كبرناها لانها مش بكسلات
   # مش بكسلات زي PNG أو JPG
   flutter_svg: ^2.0.10
+  google_fonts: ^6.3.3
+  carousel_slider: ^5.1.1
+  shared_preferences: ^2.5.4
+  provider: ^6.1.5+1
 
 
 
@@ -70,6 +74,10 @@ flutter:
     - assets/images/
     - assets/images/icons/
     - assets/images/background/
+    - assets/images/minimage/
+    - assets/files/quran/
+    - assets/files/Hadeeth/
+
 
 
 

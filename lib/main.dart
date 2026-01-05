@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/intro_screen.dart';
+import 'package:islami/providers/most_recent_provider.dart';
+import 'package:islami/tabs/hadeth_tab/details/hadeth_details.dart';
+import 'package:islami/tabs/quran_tab/details/sura_details_screen.dart';
 import 'package:islami/utils/app_routs.dart';
 import 'package:islami/utils/app_theme.dart';
+import 'package:provider/provider.dart';
 
 import 'home/home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => MostRecentProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -28,6 +37,8 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRouts.introScreenRout: (context) => IntroScreen(),
         AppRouts.homeScreenRoute: (context) => HomeScreen(),
+        AppRouts.suraDetailsScreen: (context) => SuraDetailsScreen(),
+        AppRouts.HadethDetails: (context) => HadethDetails(),
       },
     );
   }

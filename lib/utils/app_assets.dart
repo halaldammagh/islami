@@ -14,4 +14,17 @@ class AppAssets {
   static const String radiopg = 'assets/images/background/radio_screen.png';
   static const String hadethpg = 'assets/images/background/hadeth_screen.png';
   static const String timepg = 'assets/images/background/time_screen.png';
+  static const String vector = 'assets/images/Vector.png';
+  static const String hadethCard = 'assets/images/hadithCard.png';
+  static const String sebhaCap = 'assets/images/Sebha.png';
+  static const String radiaMo = 'assets/images/radioItem.png';
+  static const String radiaVol = 'assets/images/vol.png';
+  static const String off = 'assets/images/icons/off.png';
+  static const String play = 'assets/images/icons/play.png';
+  static const String volumeCross = 'assets/images/icons/volumeCross.png';
+  static const String volumeHigh = 'assets/images/icons/volumeHigh.png';
+  static const String itemTimeBg = 'assets/images/timebg.png';
+  static const String volumeSlash = 'assets/images/volume_slash.png';
+  static const String eveningAzkar = 'assets/images/EvenAzkar.png';
+  static const String morningAzkar = 'assets/images/morningAzkar.png';
 }

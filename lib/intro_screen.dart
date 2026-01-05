@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:islami/home/home_screen.dart';
 import 'package:islami/utils/app_assets.dart';
 import 'package:islami/utils/app_routs.dart';
 
 class IntroScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
       globalBackgroundColor: const Color(0xFF1E1E1E),
-
       pages: [
         PageViewModel(
           title: '',
@@ -97,8 +94,6 @@ class IntroScreen extends StatelessWidget {
             contentMargin: EdgeInsets.zero,
           ),
         ),
-
-
       ],
 
       showSkipButton: false,
@@ -110,13 +105,8 @@ class IntroScreen extends StatelessWidget {
       next: const Text('Next', style: TextStyle(color: Color(0xFFE2BE7F))),
       done: const Text('Next', style: TextStyle(color: Color(0xFFE2BE7F))),
       onDone: () {
-        Navigator.pushReplacementNamed(
-          context,
-          AppRouts.homeScreenRoute,
-        );
+        Navigator.pushReplacementNamed(context, AppRouts.homeScreenRoute);
       },
-
-
 
       dotsDecorator: const DotsDecorator(
         activeColor: Color(0xFFE2BE7F),
