@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:islami/model/quran_resources.dart';
+import 'package:islami/tabs/quran_tab/shared_prefs_utils.dart';
 import 'package:islami/tabs/quran_tab/widget/most_recently.dart';
 import 'package:islami/tabs/quran_tab/widget/sura_item_widget.dart';
 import 'package:islami/utils/app_assets.dart';
@@ -10,6 +11,7 @@ import 'package:islami/utils/app_styles.dart';
 
 ///width : 430  height : 932
 class QuranTab extends StatefulWidget {
+
 
   QuranTab({super.key});
 
@@ -83,6 +85,8 @@ class _QuranTabState extends State<QuranTab> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
+                      saveLastSuraIndex(filterList[index]);
+
                       Navigator.of(context).pushNamed(
                         AppRouts.suraDetailsScreen,
                         arguments: filterList[index],
@@ -131,4 +135,5 @@ class _QuranTabState extends State<QuranTab> {
     }
     filterList = filterSearchList;
   }
+
 }
