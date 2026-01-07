@@ -8,8 +8,28 @@ class SebhaTab extends StatefulWidget {
   State<SebhaTab> createState() => _SebhaTabState();
 }
 
-class _SebhaTabState extends State<SebhaTab> {
+class _SebhaTabState extends State<SebhaTab>
+    with SingleTickerProviderStateMixin {
+  List<String> sebha = ['سبحان الله', 'الحمد لله', 'الله اكبر'];
   int counter = 0;
+  late AnimationController _controller;
+  double rotation = 0;
+  int index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 250),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +46,19 @@ class _SebhaTabState extends State<SebhaTab> {
             Text('سَبِّحِ اسْمَ رَبِّكَ الأعلى ', style: AppStyles.bold36White),
             SizedBox(height: height * 0.032),
             Stack(
+              alignment: Alignment.topCenter,
               children: [
-                Image.asset(AppAssets.sebhaCap),
+                AnimatedBuilder(
+                  animation: _controller,
+                  builder: (_, child) {
+                    return Transform.rotate(
+                      alignment: const Alignment(0.0, 0.18),
+                      angle: rotation,
+                      child: child,
+                    );
+                  },
+                  child: Image.asset(AppAssets.sebhaCap, fit: BoxFit.contain),
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: height * 0.215,
@@ -37,12 +68,28 @@ class _SebhaTabState extends State<SebhaTab> {
                     splashColor: AppColors.transParentColor,
                     highlightColor: AppColors.transParentColor,
                     onTap: () {
+                      if (index == 2) {
+                        index = 0;
+                      } else {
+                        index++;
+                      }
                       counter++;
+                      if (counter > 33) {
+                        counter = 0;
+                      }
+
+                      rotation += 0.25;
+                      _controller.forward(from: 0);
                       setState(() {});
                     },
                     child: Column(
                       children: [
-                        Text('سبحان الله', style: AppStyles.bold36White),
+                        Container(
+                          child: Text(
+                            sebha[index],
+                            style: AppStyles.bold36White,
+                          ),
+                        ),
                         SizedBox(height: height * 0.021),
 
                         Text('$counter', style: AppStyles.bold36White),
