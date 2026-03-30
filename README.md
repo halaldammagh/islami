@@ -58,20 +58,6 @@ The app focuses on:
 * Dart
 * Material Design
 
----
-
-## 📸 Screenshots
-
-> (Add your app screenshots here)
-
----
-
-## 🎥 Demo
-
-> (Add demo video here)
-
----
-
 ## 🚀 Getting Started
 
 ```bash
