@@ -1,3 +1,7 @@
+
+<img width="1920" height="1440" alt="956shots_so" src="https://github.com/user-attachments/assets/f0733540-10cf-4594-9563-39627e01f478" />
+
+
 # 🌙 Islami App
 
 Islami is a mobile application designed to help users stay connected with their daily Islamic practices through a simple and user-friendly experience. The app provides essential tools such as Quran reading, Tasbeeh, and Islamic content in one place.
